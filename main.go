@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/Rahul-D78/micro-go/handler"
+	"github.com/gorilla/mux"
 )
 
 func main() {
@@ -21,8 +22,18 @@ func main() {
 	// Read More about it https://pkg.go.dev/net/http#ServeMux
 
 	//create a new ServeMux
-	sm := http.NewServeMux()
-	sm.Handle("/", ph)
+	sm := mux.NewRouter()
+
+	getRouter := sm.Methods(http.MethodGet).Subrouter()
+	getRouter.HandleFunc("/", ph.GetProducts)
+
+	putRouter := sm.Methods(http.MethodPut).Subrouter()
+	putRouter.HandleFunc("/{id:[0-9]+}", ph.UpdateProducts)
+
+	postRouter := sm.Methods(http.MethodPost).Subrouter()
+	postRouter.HandleFunc("/", ph.AddProduct)
+
+	// sm.Handle("/products", ph)
 
 	//modifying for handling blocking connections
 	s := &http.Server{
