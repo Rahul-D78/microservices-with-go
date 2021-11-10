@@ -14,7 +14,7 @@ import (
 func main() {
 
 	l := log.New(os.Stdout, "Microservices in GO ", log.LstdFlags)
-	hh := handler.NewHello(l)
+	ph := handler.NewProducts(l)
 
 	//converting the function into a handler type and registering it into DefaultServeMux
 	//DefaultServeMux is a server multiplexer which have the logic to call the function based on the path given
@@ -22,7 +22,7 @@ func main() {
 
 	//create a new ServeMux
 	sm := http.NewServeMux()
-	sm.Handle("/", hh)
+	sm.Handle("/", ph)
 
 	//modifying for handling blocking connections
 	s := &http.Server{

@@ -11,15 +11,19 @@ import (
 //http handler is a interface with a single method  https://pkg.go.dev/net/http#Handler
 //we are creating a struct which implements the http handler
 
+//Hello is a single handler
 type Hello struct {
 	l *log.Logger
 }
 
+//NewHello creates a new hello handler with the given logger
 func NewHello(l *log.Logger) *Hello {
 	return &Hello{l}
 }
 
 //Request is a struct type so we are using * there and ResponseWriter is an interface
+//ServerHTTP implements the go http.Handler interface
+//Read more from here https://pkg.go.dev/net/http#Handler
 func (h *Hello) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	//we have implemented dependency injection so that the NewHello function which takes logger
