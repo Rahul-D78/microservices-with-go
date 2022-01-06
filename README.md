@@ -2,7 +2,7 @@
 
 This repo contains an introduction for building applications in a microservice architecture using GoLang .
 
-## Contents:
+## Future Work:
 
 * Load Balancers
 * API gateway
